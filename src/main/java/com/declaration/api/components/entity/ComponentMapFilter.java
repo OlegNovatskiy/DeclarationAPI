@@ -1,4 +1,4 @@
-package com.declarationapi.components.entity;
+package com.declaration.api.components.entity;
 
 import java.io.Serializable;
 
@@ -13,6 +13,8 @@ public class ComponentMapFilter implements Serializable {
 	
 	private String positionDeclarant;
 	private Integer yearCreateDeclaration;
+	
+	public ComponentMapFilter(){}
 	
 	public ComponentMapFilter(String positionDeclarant, Integer yearCreateDeclaration) {
 		this.positionDeclarant = positionDeclarant;

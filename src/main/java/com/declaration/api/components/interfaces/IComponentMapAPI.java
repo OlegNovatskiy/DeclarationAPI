@@ -1,9 +1,9 @@
-package com.declarationapi.components.interfaces;
+package com.declaration.api.components.interfaces;
 
 import java.util.List;
 
-import com.declarationapi.components.entity.ComponentMapFilter;
-import com.declarationapi.components.entity.ComponentMapInfo;
+import com.declaration.api.components.entity.ComponentMapFilter;
+import com.declaration.api.components.entity.ComponentMapInfo;
 
 /**
  * Interface for API of map

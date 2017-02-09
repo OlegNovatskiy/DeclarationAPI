@@ -1,4 +1,4 @@
-package com.declarationapi.components.entity;
+package com.declaration.api.components.entity;
 
 import java.io.Serializable;
 

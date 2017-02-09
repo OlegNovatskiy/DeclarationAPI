@@ -1,4 +1,4 @@
-package com.declarationapi.components.service;
+package com.declaration.api.components.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,9 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.declarationapi.components.entity.ComponentMapFilter;
-import com.declarationapi.components.entity.ComponentMapInfo;
-import com.declarationapi.components.interfaces.IComponentMapAPI;
+import com.declaration.api.components.entity.ComponentMapFilter;
+import com.declaration.api.components.entity.ComponentMapInfo;
+import com.declaration.api.components.interfaces.IComponentMapAPI;
 
 /**
  * DAO for map API

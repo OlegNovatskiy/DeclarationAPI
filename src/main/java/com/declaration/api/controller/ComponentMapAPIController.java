@@ -1,4 +1,4 @@
- package com.declarationapi.controller;
+ package com.declaration.api.controller;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.declarationapi.components.entity.ComponentMapFilter;
-import com.declarationapi.components.entity.ComponentMapInfo;
-import com.declarationapi.service.ComponentMapAPIService;
+import com.declaration.api.components.entity.ComponentMapFilter;
+import com.declaration.api.components.entity.ComponentMapInfo;
+import com.declaration.api.service.ComponentMapAPIService;
 
 /**
  * Controller for map API
