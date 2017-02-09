@@ -3,7 +3,7 @@ package com.declaration.api.components.entity;
 import java.io.Serializable;
 
 /**
- * Model for hold info for map
+ * Model hold info for map component
  * @author olegnovatskiy
  *
  */
