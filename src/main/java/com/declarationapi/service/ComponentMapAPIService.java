@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.declarationapi.components.entity.ComponentMapFilter;
 import com.declarationapi.components.entity.ComponentMapInfo;
-import com.declarationapi.components.interfaces.IMapAPI;
+import com.declarationapi.components.interfaces.IComponentMapAPI;
 
 /**
  * Service for work with api for map
@@ -17,7 +17,7 @@ import com.declarationapi.components.interfaces.IMapAPI;
 public class ComponentMapAPIService {
 
 	@Autowired
-	private IMapAPI iMapAPI;
+	private IComponentMapAPI iComponentMapAPI;
 			
 	/**
 	 * Method that will return informations for map 
@@ -25,8 +25,8 @@ public class ComponentMapAPIService {
 	 * @param filterForMap
 	 * @return List<InfoForMap> - list of informations
 	 */
-	public List<ComponentMapInfo> findInfoForMap(ComponentMapFilter filterForMap){
-		return iMapAPI.findInfoForMap(filterForMap);
+	public List<ComponentMapInfo> findInfoMap(ComponentMapFilter componentMapFilter){
+		return iComponentMapAPI.findInfoMap(componentMapFilter);
 	}
 	
 }

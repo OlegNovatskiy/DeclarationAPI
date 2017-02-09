@@ -13,10 +13,6 @@ public class ComponentMapFilter implements Serializable {
 	
 	private String positionDeclarant;
 	private Integer yearCreateDeclaration;
-
-	public ComponentMapFilter(){
-		
-	}
 	
 	public ComponentMapFilter(String positionDeclarant, Integer yearCreateDeclaration) {
 		this.positionDeclarant = positionDeclarant;

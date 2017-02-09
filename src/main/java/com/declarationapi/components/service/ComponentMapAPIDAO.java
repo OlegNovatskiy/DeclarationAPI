@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.declarationapi.components.entity.ComponentMapFilter;
 import com.declarationapi.components.entity.ComponentMapInfo;
-import com.declarationapi.components.interfaces.IMapAPI;
+import com.declarationapi.components.interfaces.IComponentMapAPI;
 
 /**
  * DAO for map API
@@ -19,7 +19,7 @@ import com.declarationapi.components.interfaces.IMapAPI;
  * @author olegnovatskiy
  */
 @Repository
-public class ComponentMapAPIDAO implements IMapAPI {
+public class ComponentMapAPIDAO implements IComponentMapAPI {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -29,7 +29,7 @@ public class ComponentMapAPIDAO implements IMapAPI {
 	 * 
 	 * @author olegnovatskiy
 	 */
-	public static class MyRowMap implements RowMapper<ComponentMapInfo> {
+	public static class ComponentMapRowMap implements RowMapper<ComponentMapInfo> {
 		/**
 		 * Convert list of date into model
 		 */
@@ -44,10 +44,10 @@ public class ComponentMapAPIDAO implements IMapAPI {
 	/**
 	 * Method execute select query for finding informations about regions
 	 * 
-	 * @return List<InfoForMap> - list of info
+	 * @return List<ComponentMapInfo> - list of info
 	 */
 	@Override
-	public List<ComponentMapInfo> findInfoForMap(ComponentMapFilter filterForMap) {
+	public List<ComponentMapInfo> findInfoMap(ComponentMapFilter componentMapFilter) {
 
 		final StringBuilder queryForSelect = new StringBuilder();
 		queryForSelect.append(" SELECT");
@@ -58,11 +58,11 @@ public class ComponentMapAPIDAO implements IMapAPI {
 		queryForSelect.append("	FROM type AS ty");
 		queryForSelect.append(" INNER JOIN subject_info AS si ON si.id = ty.person_id");
 		queryForSelect.append(" INNER JOIN income AS inc ON inc.person_id = si.id");
-		queryForSelect.append(String.format(" WHERE ty.declaration_year = %d",filterForMap.getYearCreateDeclaration()));
-		queryForSelect.append( filterForMap.getPositionDeclarant().isEmpty() ? "" : String.format(" AND si.work_post = '%s'", filterForMap.getPositionDeclarant()));
+		queryForSelect.append(String.format(" WHERE ty.declaration_year = %d",componentMapFilter.getYearCreateDeclaration()));
+		queryForSelect.append( componentMapFilter.getPositionDeclarant().isEmpty() ? "" : String.format(" AND si.work_post = '%s'", componentMapFilter.getPositionDeclarant()));
 		queryForSelect.append(" GROUP BY si.actual_region;");
 
-		return jdbcTemplate.query(queryForSelect.toString(), new MyRowMap());
+		return jdbcTemplate.query(queryForSelect.toString(), new ComponentMapRowMap());
 	}
 
 }

@@ -11,7 +11,7 @@ import com.declarationapi.components.entity.ComponentMapInfo;
  * @author olegnovatskiy
  */
 @FunctionalInterface
-public interface IMapAPI {
+public interface IComponentMapAPI {
 	
 	/**
 	 * Method find info for map
@@ -19,6 +19,6 @@ public interface IMapAPI {
 	 * @param filterForMap - filter for search
 	 * @return List<InfoForMap> - informations for map
 	 */
-	public List<ComponentMapInfo> findInfoForMap(ComponentMapFilter filterForMap);
+	public List<ComponentMapInfo> findInfoMap(ComponentMapFilter componentMapFilter);
 	
 }

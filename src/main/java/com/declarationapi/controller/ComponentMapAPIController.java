@@ -28,26 +28,26 @@ public class ComponentMapAPIController {
 	 * Method finding informations about regions(count declarations, name region, middle salary of year)
 	 * RequestMethod for form - GET
 	 * 
-	 * @return List<InfoForMap> - list of information
+	 * @return List<ComponentMapInfo> - list of information
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<ComponentMapInfo>  findAllInfoForMap(){
+	public List<ComponentMapInfo>  findInfoMapAll(){
 		
 		String emptyPosition = "";
 		
-		return mapAPIService.findInfoForMap(new ComponentMapFilter(emptyPosition, 2017));	
+		return mapAPIService.findInfoMap(new ComponentMapFilter(emptyPosition, 2017));	
 	}
 	/**
 	 * Method finding filtered informations about regions(count declarations, name region, middle salary of year)
 	 * RequestMethod for form - GET
 	 *
-	 * @param filterForMap
-	 * @return List<InfoForMap> - list of filtered info 
+	 * @param componentMapFilter
+	 * @return List<ComponentMapInfo> - list of filtered info 
 	 */
 	@RequestMapping(value = "/filter", method = RequestMethod.POST)
-	public List<ComponentMapInfo> findWithFilterInfoForMap(@RequestBody ComponentMapFilter filterForMap){
+	public List<ComponentMapInfo> findInfoMapFilter(@RequestBody ComponentMapFilter componentMapFilter){
 		
-		return mapAPIService.findInfoForMap(filterForMap);	
+		return mapAPIService.findInfoMap(componentMapFilter);	
 	}
 	
 }
