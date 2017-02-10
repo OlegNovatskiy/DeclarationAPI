@@ -37,7 +37,7 @@ public class DeclarationsController {
 		if (filterShortDeclaration.getYearCreateDeclaration() == null || filterShortDeclaration.getLimitBatch() == null
 				|| filterShortDeclaration.getPageBatch() == null) {
 			
-			return new Response<>(StatusResponse.ERROR, "Fields yearCreate, limit and page are required!!!", null);
+			return new Response<>(StatusResponse.ERROR, "Fields yearCreateDaclaration, limitBatch and pageBatch are required!!!", null);
 		} else {
 			
 			return new Response<>(StatusResponse.SUCCESS, "Search is successfull", declarationService.search(filterShortDeclaration));

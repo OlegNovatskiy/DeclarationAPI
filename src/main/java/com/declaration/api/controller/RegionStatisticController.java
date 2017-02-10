@@ -38,7 +38,7 @@ public class RegionStatisticController {
 
 		if (filterRegionStatistic.getYearCreateDeclaration() == null) {
 
-			return new Response<>(StatusResponse.ERROR, "Fields yearCreate is required!!!", null);
+			return new Response<>(StatusResponse.ERROR, "Fields yearCreateDeclaration is required!!!", null);
 		} else {
 
 			return new Response<>(StatusResponse.SUCCESS, "Search is successfull",
