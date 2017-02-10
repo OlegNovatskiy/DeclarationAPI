@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author olegnovatskiy
  *
  */
-public class ComponentFilterDataFilter extends ComponentMapDataFilter implements Serializable {
+public class FilterComponentDataFilter extends MapComponentDataFilter implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,16 +18,6 @@ public class ComponentFilterDataFilter extends ComponentMapDataFilter implements
 	private String firstName;
 	private String lastName;
 	private String middleName;
-
-	public ComponentFilterDataFilter() {
-		super();
-		this.location = "";
-		this.limit = 10;
-		this.page = 1;
-		this.firstName = "";
-		this.lastName = "";
-		this.middleName = "";
-	}
 
 	public String getLocation() {
 		return location;
@@ -76,6 +66,5 @@ public class ComponentFilterDataFilter extends ComponentMapDataFilter implements
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
-	
-	
+
 }

@@ -1,7 +1,7 @@
 package com.declaration.api.components.interfaces;
 
-import com.declaration.api.components.entity.ComponentFilterDataFilter;
-import com.declaration.api.components.entity.ComponentFilterInfo;
+import com.declaration.api.components.entity.FilterComponentDataFilter;
+import com.declaration.api.components.entity.FilterComponentDeclarations;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author olegnovatskiy
  */
 @FunctionalInterface
-public interface IComponentFilter {
+public interface IFilterComponent {
 	
 	/**
 	 * Method find info for filter component
@@ -19,6 +19,6 @@ public interface IComponentFilter {
 	 * @param componentFilterDataFilter
 	 * @return List<ComponentFilterInfo> - list information for filter component
 	 */
-	public List<ComponentFilterInfo> findInfoComponentFilter(ComponentFilterDataFilter componentFilterDataFilter);
+	public List<FilterComponentDeclarations> search(FilterComponentDataFilter componentFilterDataFilter);
 
 }

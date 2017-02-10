@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author olegnovatskiy
  *
  */
-public class ComponentMapInfo implements Serializable {
+public class MapComponentDeclarations implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class ComponentMapInfo implements Serializable {
 	private Integer salaryOfYear;
 	private Integer assetsOfYear;
 
-	public ComponentMapInfo(String nameRegion, Integer countDeclarationInRegion, Integer salaryOfYear, Integer assetsOfyear) {
+	public MapComponentDeclarations(String nameRegion, Integer countDeclarationInRegion, Integer salaryOfYear, Integer assetsOfyear) {
 		this.nameRegion = nameRegion;
 		this.countDeclarationInRegion = countDeclarationInRegion;
 		this.salaryOfYear = salaryOfYear;

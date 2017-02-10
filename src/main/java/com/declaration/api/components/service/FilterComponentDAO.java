@@ -4,14 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.declaration.api.components.entity.ComponentFilterDataFilter;
-import com.declaration.api.components.entity.ComponentFilterInfo;
-import com.declaration.api.components.interfaces.IComponentFilter;
+import com.declaration.api.components.entity.FilterComponentDataFilter;
+import com.declaration.api.components.entity.FilterComponentDeclarations;
+import com.declaration.api.components.interfaces.IFilterComponent;
 
 /**
  * Service for component filter
@@ -19,27 +20,26 @@ import com.declaration.api.components.interfaces.IComponentFilter;
  * @author olegnovatskiy
  */
 @Repository
-public class ComponentFilterDAO implements IComponentFilter {
+public class FilterComponentDAO implements IFilterComponent {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private static final String SELECT_QUERY = "SELECT ty.declaration_id, si.first_name, si.last_name, si.middle_name, si.work_post, si.actual_region FROM type as ty INNER JOIN subject_info AS si ON ty.person_id = si.id";
-	private Boolean useAndMYSQLWord;
+	private static final String SELECT_DECLARATIONS_QUERY = "SELECT ty.declaration_id, si.first_name, si.last_name, si.middle_name, si.work_post, si.actual_region FROM type as ty INNER JOIN subject_info AS si ON ty.person_id = si.id";
 
 	/**
 	 * Map for work with selected data from db
 	 * 
 	 * @author olegnovatskiy
 	 */
-	public static class ComponentFilterRowMap implements RowMapper<ComponentFilterInfo> {
+	public static class FilterComponentRowMap implements RowMapper<FilterComponentDeclarations> {
 		/**
 		 * Convert list of date into model
 		 */
 		@Override
-		public ComponentFilterInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+		public FilterComponentDeclarations mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-			return new ComponentFilterInfo(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+			return new FilterComponentDeclarations(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 					rs.getString(5), rs.getString(6));
 		}
 
@@ -54,23 +54,16 @@ public class ComponentFilterDAO implements IComponentFilter {
 	 *         component
 	 */
 	@Override
-	public List<ComponentFilterInfo> findInfoComponentFilter(ComponentFilterDataFilter componentFilterDataFilter) {
+	public List<FilterComponentDeclarations> search(FilterComponentDataFilter componentFilterDataFilter) {
 
-		String limit = componentFilterDataFilter.getLimit() >= 1
-				? String.format(" LIMIT %d", componentFilterDataFilter.getLimit()) : " LIMIT 10";
-		Integer offset = componentFilterDataFilter.getPage() >= 1
-				? componentFilterDataFilter.getLimit() * (componentFilterDataFilter.getPage() - 1) : 0;
+		String limit = String.format(" LIMIT %d", componentFilterDataFilter.getLimit());
+		Integer offset = componentFilterDataFilter.getLimit() * (componentFilterDataFilter.getPage() - 1);
 		String page = String.format(" OFFSET %d;", offset);
+		
 		StringBuilder selectQuery = new StringBuilder();
-		useAndMYSQLWord = false;
 
-		selectQuery.append(SELECT_QUERY);
-
-		if (componentFilterDataFilter.getYearCreate() > 1901) {
-			selectQuery.append(
-					String.format(" WHERE ty.declaration_year = %d", componentFilterDataFilter.getYearCreate()));
-			useAndMYSQLWord = true;
-		}
+		selectQuery.append(SELECT_DECLARATIONS_QUERY);
+		selectQuery.append(String.format(" WHERE ty.declaration_year = %d", componentFilterDataFilter.getYearCreate()));
 		addCondition(selectQuery, "si.actual_region", componentFilterDataFilter.getLocation());
 		addCondition(selectQuery, "si.first_name", componentFilterDataFilter.getFirstName());
 		addCondition(selectQuery, "si.last_name", componentFilterDataFilter.getLastName());
@@ -79,7 +72,7 @@ public class ComponentFilterDAO implements IComponentFilter {
 		selectQuery.append(limit);
 		selectQuery.append(page);
 
-		return jdbcTemplate.query(selectQuery.toString(), new ComponentFilterRowMap());
+		return jdbcTemplate.query(selectQuery.toString(), new FilterComponentRowMap());
 	}
 
 	/**
@@ -96,13 +89,8 @@ public class ComponentFilterDAO implements IComponentFilter {
 	 * @return boolean status of mysql word 'AND'
 	 */
 	private void addCondition(StringBuilder query, String addedField, String value) {
-		if (!value.isEmpty()) {
-			if (useAndMYSQLWord) {
+		if (!StringUtils.isBlank(value)) {
 				query.append(String.format(" AND %s = '%s'", addedField, value));
-			} else {
-				query.append(String.format(" WHERE %s = '%s'", addedField, value));
-				useAndMYSQLWord = true;
-			}
 		}
 	}
 

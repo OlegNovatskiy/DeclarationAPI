@@ -2,7 +2,12 @@ package com.declaration.api.components.entity;
 
 import java.io.Serializable;
 
-public class ComponentFilterInfo implements Serializable {
+/**
+ * Model hold info for filter component
+ * @author olegnovatskiy
+ *
+ */
+public class FilterComponentDeclarations implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -13,7 +18,7 @@ public class ComponentFilterInfo implements Serializable {
 	private String position;
 	private String location;
 
-	public ComponentFilterInfo(String id, String firstName, String lastName, String middleName, String position,
+	public FilterComponentDeclarations(String id, String firstName, String lastName, String middleName, String position,
 			String location) {
 		this.id = id;
 		this.firstName = firstName;
