@@ -10,17 +10,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.declaration.api.components.entity.FilterComponentDataFilter;
-import com.declaration.api.components.entity.FilterComponentDeclarations;
-import com.declaration.api.components.interfaces.IFilterComponent;
+import com.declaration.api.components.entity.FilterShortDeclaration;
+import com.declaration.api.components.entity.ShortDeclaration;
+import com.declaration.api.components.interfaces.IDeclarations;
 
 /**
- * Service for component filter
+ * Service for work with declarations
  * 
  * @author olegnovatskiy
  */
 @Repository
-public class FilterComponentDAO implements IFilterComponent {
+public class DeclarationsDAO implements IDeclarations {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -32,43 +32,42 @@ public class FilterComponentDAO implements IFilterComponent {
 	 * 
 	 * @author olegnovatskiy
 	 */
-	public static class FilterComponentRowMap implements RowMapper<FilterComponentDeclarations> {
+	public static class FilterComponentRowMap implements RowMapper<ShortDeclaration> {
 		/**
 		 * Convert list of date into model
 		 */
 		@Override
-		public FilterComponentDeclarations mapRow(ResultSet rs, int rowNum) throws SQLException {
+		public ShortDeclaration mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-			return new FilterComponentDeclarations(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6));
+			return new ShortDeclaration(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getString(6), rs.getString(7));
 		}
 
 	}
 
 	/**
-	 * Method find informations for component filter
+	 * Method finds declarations
 	 * 
-	 * @param componentFilterDataFilter
+	 * @param filterShortDeclaration
 	 *            - data for filter
-	 * @return List<ComponentFilterInfo> - find informations for filter
-	 *         component
+	 * @return List<ComponentFilterInfo> - list of declarations with short set of data
 	 */
 	@Override
-	public List<FilterComponentDeclarations> search(FilterComponentDataFilter componentFilterDataFilter) {
+	public List<ShortDeclaration> search(FilterShortDeclaration filterShortDeclaration) {
 
-		String limit = String.format(" LIMIT %d", componentFilterDataFilter.getLimit());
-		Integer offset = componentFilterDataFilter.getLimit() * (componentFilterDataFilter.getPage() - 1);
+		String limit = String.format(" LIMIT %d", filterShortDeclaration.getLimitBatch());
+		Integer offset = filterShortDeclaration.getLimitBatch() * (filterShortDeclaration.getPageBatch() - 1);
 		String page = String.format(" OFFSET %d;", offset);
 		
 		StringBuilder selectQuery = new StringBuilder();
 
 		selectQuery.append(SELECT_DECLARATIONS_QUERY);
-		selectQuery.append(String.format(" WHERE ty.declaration_year = %d", componentFilterDataFilter.getYearCreate()));
-		addCondition(selectQuery, "si.actual_region", componentFilterDataFilter.getLocation());
-		addCondition(selectQuery, "si.first_name", componentFilterDataFilter.getFirstName());
-		addCondition(selectQuery, "si.last_name", componentFilterDataFilter.getLastName());
-		addCondition(selectQuery, "si.middle_name", componentFilterDataFilter.getMiddleName());
-		addCondition(selectQuery, "si.work_post", componentFilterDataFilter.getPosition());
+		selectQuery.append(String.format(" WHERE ty.declaration_year = %d", filterShortDeclaration.getYearCreateDeclaration()));
+		addCondition(selectQuery, "si.actual_region", filterShortDeclaration.getRegionDeclarant());
+		addCondition(selectQuery, "si.first_name", filterShortDeclaration.getFirstName());
+		addCondition(selectQuery, "si.last_name", filterShortDeclaration.getLastName());
+		addCondition(selectQuery, "si.middle_name", filterShortDeclaration.getMiddleName());
+		addCondition(selectQuery, "si.work_post", filterShortDeclaration.getPositionDeclarant());
 		selectQuery.append(limit);
 		selectQuery.append(page);
 

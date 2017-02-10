@@ -6,43 +6,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.declaration.api.components.entity.MapComponentDataFilter;
-import com.declaration.api.components.entity.MapComponentDeclarations;
+import com.declaration.api.components.entity.FilterRegionStatistic;
+import com.declaration.api.components.entity.RegionStatistic;
 import com.declaration.api.components.entity.Response;
 import com.declaration.api.components.enums.StatusResponse;
-import com.declaration.api.service.MapComponentService;
+import com.declaration.api.service.RegionStatisticService;
 
 /**
- * Controller for component map
+ * Controller for region statistic
  * 
  * @author olegnovatskiy
  *
  */
 @RestController
-@RequestMapping("/component/map")
-public class MapComponentController {
+@RequestMapping("/component/regionStatistic")
+public class RegionStatisticController {
 
 	@Autowired
-	private MapComponentService mapComponentService;
+	private RegionStatisticService regionStatisticService;
 
 	/**
-	 * Method finding filtered informations about regions(count declarations,
-	 * name region, salaries and assets of year) RequestMethod for form - POST
+	 * Method finding statistic for all regions
+	 *  RequestMethod - POST
 	 *
-	 * @param mapComponentFilter
+	 * @param filterRegionStatistic
 	 *            - data for filter
-	 * @return List<ComponentMapInfo> - list of filtered info
+	 * @return List<RegionStatistic> - list of statistics
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public Response<MapComponentDeclarations> search(@RequestBody MapComponentDataFilter mapComponentFilter) {
+	public Response<RegionStatistic> search(@RequestBody FilterRegionStatistic filterRegionStatistic) {
 
-		if (mapComponentFilter.getYearCreate() == null) {
+		if (filterRegionStatistic.getYearCreateDeclaration() == null) {
 
 			return new Response<>(StatusResponse.ERROR, "Fields yearCreate is required!!!", null);
 		} else {
 
 			return new Response<>(StatusResponse.SUCCESS, "Search is successfull",
-					mapComponentService.search(mapComponentFilter));
+					regionStatisticService.search(filterRegionStatistic));
 		}
 
 	}

@@ -3,44 +3,44 @@ package com.declaration.api.components.entity;
 import java.io.Serializable;
 
 /**
- * Model hold filters into filter component
+ * Model holds set of data to filter of declaration
  * 
  * @author olegnovatskiy
  *
  */
-public class FilterComponentDataFilter extends MapComponentDataFilter implements Serializable {
+public class FilterShortDeclaration extends FilterRegionStatistic implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String location;
-	private Integer limit;
-	private Integer page;
+	private String regionDeclarant;
+	private Integer limitBatch;
+	private Integer pageBatch;
 	private String firstName;
 	private String lastName;
 	private String middleName;
 
-	public String getLocation() {
-		return location;
+	public String getRegionDeclarant() {
+		return regionDeclarant;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setRegionDeclarant(String regionDeclarant) {
+		this.regionDeclarant = regionDeclarant;
 	}
 
-	public Integer getLimit() {
-		return limit;
+	public Integer getLimitBatch() {
+		return limitBatch;
 	}
 
-	public void setLimit(Integer limit) {
-		this.limit = limit;
+	public void setLimitBatch(Integer limitBatch) {
+		this.limitBatch = limitBatch;
 	}
 
-	public Integer getPage() {
-		return page;
+	public Integer getPageBatch() {
+		return pageBatch;
 	}
 
-	public void setPage(Integer page) {
-		this.page = page;
+	public void setPageBatch(Integer pageBatch) {
+		this.pageBatch = pageBatch;
 	}
 
 	public String getFirstName() {

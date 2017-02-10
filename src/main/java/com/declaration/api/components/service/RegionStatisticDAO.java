@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.declaration.api.components.entity.MapComponentDataFilter;
-import com.declaration.api.components.entity.MapComponentDeclarations;
-import com.declaration.api.components.interfaces.IMapComponent;
+import com.declaration.api.components.entity.FilterRegionStatistic;
+import com.declaration.api.components.entity.RegionStatistic;
+import com.declaration.api.components.interfaces.IRegionStatistic;
 
 /**
  * DAO for map component
@@ -20,7 +20,7 @@ import com.declaration.api.components.interfaces.IMapComponent;
  * @author olegnovatskiy
  */
 @Repository
-public class MapComponentDAO implements IMapComponent {
+public class RegionStatisticDAO implements IRegionStatistic {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -33,34 +33,34 @@ public class MapComponentDAO implements IMapComponent {
 	 * 
 	 * @author olegnovatskiy
 	 */
-	public static class MapComponentRowMap implements RowMapper<MapComponentDeclarations> {
+	public static class MapComponentRowMap implements RowMapper<RegionStatistic> {
 
 		/**
 		 * Convert list of date into model
 		 */
 		@Override
-		public MapComponentDeclarations mapRow(ResultSet rs, int rowNum) throws SQLException {
+		public RegionStatistic mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-			return new MapComponentDeclarations(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4));
+			return new RegionStatistic(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4));
 		}
 
 	}
 
 	/**
-	 * Method execute select query for finding informations about regions
+	 * Method execute select query for finding statistic data a region
 	 * 
 	 * @return List<ComponentMapInfo> - list of info
 	 */
 	@Override
-	public List<MapComponentDeclarations> search(MapComponentDataFilter componentMapFilter) {
+	public List<RegionStatistic> search(FilterRegionStatistic filterRegionStatistic) {
 
-		String conditionYear = String.format(" WHERE ty.declaration_year = %d ", componentMapFilter.getYearCreate());
+		String conditionYear = String.format(" WHERE ty.declaration_year = %d ", filterRegionStatistic.getYearCreateDeclaration());
 		StringBuilder queryForSelect = new StringBuilder();
 		
 		queryForSelect.append(SELECT_STATISTICS_REGION_QUERY);
 		queryForSelect.append(conditionYear);
-		if(!StringUtils.isBlank(componentMapFilter.getPosition())){
-			queryForSelect.append(String.format(" AND si.work_post = '%s'", componentMapFilter.getPosition()));
+		if(!StringUtils.isBlank(filterRegionStatistic.getPositionDeclarant())){
+			queryForSelect.append(String.format(" AND si.work_post = '%s'", filterRegionStatistic.getPositionDeclarant()));
 		}		
 		queryForSelect.append(GROUP_BY_PER_REGION);
 
