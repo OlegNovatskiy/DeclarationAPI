@@ -25,7 +25,7 @@ public class DeclarationsDAO implements IDeclarations {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private static final String SELECT_DECLARATIONS_QUERY = "SELECT ty.declaration_id, si.first_name, si.last_name, si.middle_name, si.work_post, si.actual_region FROM type as ty INNER JOIN subject_info AS si ON ty.person_id = si.id";
+	private static final String SELECT_DECLARATIONS_QUERY = "SELECT ty.declaration_id,  ty.declaration_year, si.first_name, si.last_name, si.middle_name, si.work_post, si.actual_region FROM type as ty INNER JOIN subject_info AS si ON ty.person_id = si.id";
 
 	/**
 	 * Map for work with selected data from db
