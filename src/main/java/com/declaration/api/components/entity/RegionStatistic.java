@@ -1,24 +1,24 @@
-package com.declarationapi.components.entity;
+package com.declaration.api.components.entity;
 
 import java.io.Serializable;
 
 /**
- * Model for hold info for map
+ * Model holds statistic data of region
  * @author olegnovatskiy
  *
  */
-public class ComponentMapInfo implements Serializable {
+public class RegionStatistic implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private String nameRegion;
-	private Integer countDeclarationInRegion;
+	private Integer countDeclaration;
 	private Integer salaryOfYear;
 	private Integer assetsOfYear;
 
-	public ComponentMapInfo(String nameRegion, Integer countDeclarationInRegion, Integer salaryOfYear, Integer assetsOfyear) {
+	public RegionStatistic(String nameRegion, Integer countDeclaration, Integer salaryOfYear, Integer assetsOfyear) {
 		this.nameRegion = nameRegion;
-		this.countDeclarationInRegion = countDeclarationInRegion;
+		this.countDeclaration = countDeclaration;
 		this.salaryOfYear = salaryOfYear;
 		this.assetsOfYear = assetsOfyear;
 	}
@@ -31,12 +31,12 @@ public class ComponentMapInfo implements Serializable {
 		this.nameRegion = nameRegion;
 	}
 
-	public Integer getCountDeclarationInRegion() {
-		return countDeclarationInRegion;
+	public Integer getCountDeclaration() {
+		return countDeclaration;
 	}
 
-	public void setCountDeclarationInRegion(Integer countDeclarationInRegion) {
-		this.countDeclarationInRegion = countDeclarationInRegion;
+	public void setCountDeclaration(Integer countDeclaration) {
+		this.countDeclaration = countDeclaration;
 	}
 
 	public Integer getSalaryOfYear() {
@@ -54,5 +54,7 @@ public class ComponentMapInfo implements Serializable {
 	public void setAssetsOfYear(Integer assetsOfYear) {
 		this.assetsOfYear = assetsOfYear;
 	}
+
+	
 
 }

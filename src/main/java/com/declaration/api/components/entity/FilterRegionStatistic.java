@@ -1,23 +1,19 @@
-package com.declarationapi.components.entity;
+package com.declaration.api.components.entity;
 
 import java.io.Serializable;
 
 /**
- * Model for hold filter
+ * Model holds set of data to filter that select data from region for statistic
+ * 
  * @author olegnovatskiy
  *
  */
-public class ComponentMapFilter implements Serializable {
+public class FilterRegionStatistic implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String positionDeclarant;
 	private Integer yearCreateDeclaration;
-	
-	public ComponentMapFilter(String positionDeclarant, Integer yearCreateDeclaration) {
-		this.positionDeclarant = positionDeclarant;
-		this.yearCreateDeclaration = yearCreateDeclaration;
-	}
 
 	public String getPositionDeclarant() {
 		return positionDeclarant;

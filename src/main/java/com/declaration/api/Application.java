@@ -1,4 +1,4 @@
-package com.declarationapi;
+package com.declaration.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
