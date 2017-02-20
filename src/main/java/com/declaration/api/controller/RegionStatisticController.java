@@ -37,11 +37,13 @@ public class RegionStatisticController {
 	public Response<RegionStatistic> search(@RequestBody FilterRegionStatistic filterRegionStatistic) {
 
 		if (filterRegionStatistic.getYearCreateDeclaration() == null) {
-
-			return new Response<>(StatusResponse.ERROR, "Fields yearCreateDeclaration is required!!!", null);
+			Integer codeError = 204;
+			
+			return new Response<>(codeError, StatusResponse.ERROR, "Fields yearCreateDeclaration is required!!!", null);
 		} else {
+			Integer codeSuccess = 200;
 
-			return new Response<>(StatusResponse.SUCCESS, "Search is successfull",
+			return new Response<>(codeSuccess, StatusResponse.SUCCESS, "Search is successfull",
 					regionStatisticService.search(filterRegionStatistic));
 		}
 

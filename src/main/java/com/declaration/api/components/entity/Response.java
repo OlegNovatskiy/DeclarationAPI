@@ -17,14 +17,24 @@ public class Response<E> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer code;
 	private StatusResponse status;
 	private String message;
 	private List<E> listResult;
 
-	public Response(StatusResponse status, String message, List<E> listResult) {
+	public Response(Integer code, StatusResponse status, String message, List<E> listResult) {
+		this.code = code;
 		this.status = status;
 		this.message = message;
 		this.listResult = listResult;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 
 	public StatusResponse getStatus() {

@@ -36,11 +36,13 @@ public class DeclarationsController {
 	public Response<ShortDeclaration> search(@RequestBody FilterShortDeclaration filterShortDeclaration) {
 		if (filterShortDeclaration.getYearCreateDeclaration() == null || filterShortDeclaration.getLimitBatch() == null
 				|| filterShortDeclaration.getPageBatch() == null) {
+			Integer codeError = 204;
 			
-			return new Response<>(StatusResponse.ERROR, "Fields yearCreateDaclaration, limitBatch and pageBatch are required!!!", null);
+			return new Response<>(codeError, StatusResponse.ERROR, "Fields yearCreateDaclaration, limitBatch and pageBatch are required!!!", null);
 		} else {
+			Integer codeSuccess = 200;
 			
-			return new Response<>(StatusResponse.SUCCESS, "Search is successfull", declarationService.search(filterShortDeclaration));
+			return new Response<>(codeSuccess, StatusResponse.SUCCESS, "Search is successfull", declarationService.search(filterShortDeclaration));
 		}
 	}
 
